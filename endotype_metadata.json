@@ -1,0 +1,84 @@
+{
+  "title": "Endotype Catalog",
+  "description": "A Resource for Common Mechanisms in Complex Diseases",
+  "databases": {
+    "endotype_catalog": {
+      "tables": {
+        "endotypes": {
+          "label": "1. Endotypes",
+          "sort": "endotype_id",
+          "columns": {
+            "endotype_id": "Endotype Code",
+            "endotype": "Endotype Name"
+          },
+          "searchable_columns": ["endotype_id", "endotype"]
+        },
+        "genes": {
+          "label": "2. Genes",
+          "sort": "gene_symbol",
+          "columns": {
+            "gene_symbol": "Gene Symbol",
+            "entrez_id": "Entrez ID"
+          },
+          "searchable_columns": ["gene_symbol"]
+        },
+        "gene_endotype": {
+          "label": "Gene - Endotype",
+          "sort": "gene_symbol",
+          "columns": {
+            "gene_symbol": "Gene Symbol",
+            "endotype_id": "Endotype Code"
+          },
+          "foreign_keys": {
+            "gene_symbol": {
+              "table": "genes",
+              "column": "gene_symbol"
+            },
+            "endotype_id": {
+              "table": "endotypes",
+              "column": "endotype_id"
+            }
+          }
+        },
+        "edges": {
+          "label": "Interactions",
+          "sort": "interactor1",
+          "columns": {
+            "interactor1": "Interactor 1",
+            "interactor2": "Interactor 2",
+            "endotype_id": "Endotype Code"
+          },
+          "foreign_keys": {
+            "gene1": {
+              "table": "genes",
+              "column": "gene_symbol"
+            },
+            "gene2": {
+              "table": "genes",
+              "column": "gene_symbol"
+            },
+            "endotype_id": {
+              "table": "endotypes",
+              "column": "endotype_id"
+            }
+          }
+        },
+        "phenotypes": {
+          "label": "Phenotypes",
+          "sort": "phenotype",
+          "columns": {
+            "phenotype": "Phenotype",
+            "endotype_id": "Endotype Code"
+          },
+          "searchable_columns": ["phenotype"],
+          "foreign_keys": {
+            "endotype_id": {
+              "table": "endotypes",
+              "column": "endotype_id"
+            }
+          }
+        }
+      }
+    }
+  }
+}
